@@ -11,15 +11,15 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
-COPY ["api/DigitalThinkers.csproj", "api/"]
-COPY ["domain/domain.csproj", "domain/"]
-COPY ["dataaccess/dataaccess.csproj", "dataaccess/"]
-RUN dotnet restore "api/DigitalThinkers.csproj"
+COPY ["Api/DigitalThinkers.csproj", "Api/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
+RUN dotnet restore "Api/DigitalThinkers.csproj"
 COPY . .
-RUN dotnet build "api/DigitalThinkers.csproj" -c Release -o /app/build
+RUN dotnet build "Api/DigitalThinkers.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "api/DigitalThinkers.csproj" -c Release -o /app/publish
+RUN dotnet publish "Api/DigitalThinkers.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

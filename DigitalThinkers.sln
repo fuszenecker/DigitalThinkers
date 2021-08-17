@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC88DE3A-2B75-4FBF-A5E6-1D72BF6A8726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalThinkers", "src\api\DigitalThinkers.csproj", "{A23F3BF2-142F-4D13-81DD-6E64471F1CE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalThinkers", "src\Api\DigitalThinkers.csproj", "{A23F3BF2-142F-4D13-81DD-6E64471F1CE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "domain", "src\domain\domain.csproj", "{27870BCE-4BC7-42C0-B6F2-AED9CE351BB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{27870BCE-4BC7-42C0-B6F2-AED9CE351BB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dataaccess", "src\dataaccess\dataaccess.csproj", "{7B7DE17A-BD74-4771-9F61-740E81FDC483}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "src\DataAccess\DataAccess.csproj", "{7B7DE17A-BD74-4771-9F61-740E81FDC483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{419AF3EF-01F2-4363-85A0-E23072CA46C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "tests\Tests.csproj", "{419AF3EF-01F2-4363-85A0-E23072CA46C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
