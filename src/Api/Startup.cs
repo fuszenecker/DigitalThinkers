@@ -1,5 +1,6 @@
 using CorrelationId;
 using CorrelationId.DependencyInjection;
+using DigitalThinkers.DataAccess.Repositories;
 using DigitalThinkers.Domain.Interfaces;
 using DigitalThinkers.Domain.Services;
 using Microsoft.AspNetCore.Builder;
@@ -65,7 +66,11 @@ namespace DigitalThinkers
                 .AddHttpContextAccessor();
 
             // For now, it is in-memory:
-            services.AddSingleton<IMonetaryService, InMemoryMonetaryService>();
+            // services.AddSingleton<IMonetaryService, InMemoryMonetaryService>();
+
+            // For presistent nonetary service:
+            services.AddScoped<INotesRepository, NotesRepository>();
+            services.AddScoped<IMonetaryService, PersistentMonetaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
