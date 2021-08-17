@@ -56,7 +56,7 @@ namespace DigitalThinkers.Domain.Services
 
             if (total < price)
             {
-                return ($"More money should be inserted: {price - total} is missing, {total} as inserted.", null);
+                return ($"More money should be inserted: {price - total} is missing, {total} is inserted.", null);
             }
 
             (string errorMessage, IDictionary<uint, uint> change) result = (null, null);
@@ -110,7 +110,7 @@ namespace DigitalThinkers.Domain.Services
                 }
                 else
                 {
-                    result = ($"Cannot accept money, {change} cannot be payed back.", null);
+                    result = ($"Cannot accept money, {change} cannot be paid back.", null);
                 }
             });
 

@@ -63,7 +63,7 @@ namespace tests
             Assert.IsNull(errorMessage);
             Assert.IsNotNull(change);
 
-            // Nothing is payed back.
+            // Nothing is paid back.
             Assert.AreEqual(0, change.Count);
         }
 
@@ -78,7 +78,7 @@ namespace tests
             Assert.IsNull(errorMessage);
             Assert.IsNotNull(change);
 
-            // Nothing is payed back.
+            // Nothing is paid back.
             Assert.AreEqual(0, change.Count);
         }
 
@@ -93,7 +93,7 @@ namespace tests
             Assert.IsNull(errorMessage);
             Assert.IsNotNull(change);
 
-            // Nothing is payed back.
+            // Nothing is paid back.
             Assert.AreEqual(1, change.Count);
             Assert.AreEqual(10u, change.First().Key);
             Assert.AreEqual(1u, change.First().Value);
@@ -113,7 +113,7 @@ namespace tests
             Assert.IsNull(errorMessage);
             Assert.IsNotNull(change);
 
-            // Nothing is payed back.
+            // Nothing is paid back.
             Assert.AreEqual(1, change.Count);
             Assert.AreEqual(10u, change.First().Key);
             Assert.AreEqual(80u, change.First().Value);
@@ -135,7 +135,7 @@ namespace tests
             Assert.IsNull(errorMessage);
             Assert.IsNotNull(change);
 
-            // Nothing is payed back.
+            // Nothing is paid back.
             Assert.AreEqual(2, change.Count);
             Assert.AreEqual(100u, change.First().Key);
             Assert.AreEqual(1u, change.First().Value);
