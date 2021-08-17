@@ -23,10 +23,10 @@ The service can be started
     Unfortunately, on Linux, the stable `docker-compose` is quite old, so it doesn't support `service_started`:
 
     ```text
-        depends_on:
-            api:
-                # condition: service_healthy
-                condition: service_started
+    depends_on:
+        api:
+            # condition: service_healthy
+            condition: service_started
     ```
 
     So if you want tu use `docker-compose`, please use Windows and Docker Desktop.
