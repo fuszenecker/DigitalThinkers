@@ -10,15 +10,15 @@ namespace DigitalThinkers.Controllers
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class StockController : ControllerBase
+    public class StockController : RestControllerBase
     {
         private readonly ILogger<StockController> logger;
-        private readonly IMoneyStore moneyStore;
+        private readonly IMonetaryService monetaryService;
 
-        public StockController(ILogger<StockController> logger, IMoneyStore moneyStore)
+        public StockController(ILogger<StockController> logger, IMonetaryService monetaryService)
         {
             this.logger = logger;
-            this.moneyStore = moneyStore;
+            this.monetaryService = monetaryService;
         }
 
         [HttpPost]
@@ -31,7 +31,7 @@ namespace DigitalThinkers.Controllers
                 return BadRequest(message);
             }
 
-            IEnumerable<string> nonNumericKeys = request.Keys.Where(k => !Int32.TryParse(k, out var _));
+            IEnumerable<string> nonNumericKeys = GetNonNumericKeys(request);
 
             if (nonNumericKeys.Any())
             {
@@ -39,24 +39,17 @@ namespace DigitalThinkers.Controllers
                 return BadRequest($"Keys {string.Join(',', nonNumericKeys)} are not numbers.");
             }
 
-            var notes = new Dictionary<uint, uint>();
-
-            foreach (var key in request.Keys)
-            {
-                notes.Add(uint.Parse(key), request[key]);
-            }
-
+            var notes = MapNotes(request);
             this.logger.LogDebug("Storing notes: {@notes}", notes);
+            monetaryService.StoreNotes(notes);
 
-            moneyStore.StoreNotes(notes);
-
-            return Ok(moneyStore.GetNotes());
+            return Ok(monetaryService.GetNotes());
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(moneyStore.GetNotes());
+            return Ok(monetaryService.GetNotes());
         }
     }
 }
