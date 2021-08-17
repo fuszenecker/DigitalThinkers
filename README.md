@@ -2,7 +2,7 @@
 
 The service can be started
 
-1. "locally" by running:
+1. "locally" by running (might take a little time to compile the code):
 
     ```text
     dotnet run --project .\src\Api\DigitalThinkers.csproj
