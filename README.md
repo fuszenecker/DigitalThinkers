@@ -1,5 +1,7 @@
 # Digital Thinkers test excercise
 
+You might want to install [.NET Core SDK 5](https://dotnet.microsoft.com/download/dotnet/5.0) first.
+
 The service can be started
 
 1. "locally" by running (might take a little time to compile the code):
