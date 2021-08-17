@@ -16,7 +16,23 @@ namespace DigitalThinkers.Domain.Services
 
         public void StoreNotes(IDictionary<uint, uint> notes)
         {
-            this.repository.StoreNotes(notes);
+            this.repository.Transaction(() => {
+                var newStore = new Dictionary<uint, uint>(this.repository.GetNotes());
+
+                foreach (var key in notes.Keys)
+                {
+                    if (newStore.ContainsKey(key))
+                    {
+                        newStore[key] += notes[key];
+                    }
+                    else
+                    {
+                        newStore[key] = notes[key];
+                    }
+                }
+
+                this.repository.StoreNotes(newStore);
+            });
         }
 
         public IDictionary<uint, uint> GetNotes()

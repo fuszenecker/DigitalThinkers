@@ -39,8 +39,6 @@ namespace DigitalThinkers.DataAccess.Repositories
 
         public void StoreNotes(IDictionary<uint, uint> notes)
         {
-            using var transaction = context.Database.BeginTransaction();
-
             // Delete all existing items, and add the new items,
             foreach (var item in context.Notes)
             {
@@ -49,14 +47,14 @@ namespace DigitalThinkers.DataAccess.Repositories
 
             foreach (var note in notes)
             {
-                context.Add(new Note()
+                context.Notes.Add(new Note()
                 {
                     Denominator = note.Key,
                     Count = note.Value
                 });
             }
 
-            transaction.Commit();
+            context.SaveChanges();
         }
 
         public void Transaction(Action action)
