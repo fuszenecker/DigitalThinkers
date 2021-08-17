@@ -10,9 +10,6 @@ namespace DigitalThinkers
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
                 .CreateBootstrapLogger();
 
             CreateHostBuilder(args).Build().Run();
@@ -24,8 +21,7 @@ namespace DigitalThinkers
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
-                    .Enrich.WithCorrelationIdHeader("X-Correlation-ID")
-                    .WriteTo.Console())
+                    .Enrich.WithCorrelationIdHeader("X-Correlation-ID"))
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
