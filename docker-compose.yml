@@ -1,0 +1,29 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  api:
+    image: api
+    build:
+      context: src
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:5000/health"]
+      interval: 1s
+      timeout: 3s
+      retries: 50
+
+  integrationtests:
+    image: integrationtests
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    depends_on:
+      api:
+        # condition: service_healthy
+        condition: service_started

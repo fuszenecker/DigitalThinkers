@@ -47,7 +47,10 @@ namespace DigitalThinkers
 
             app.UseSerilogRequestLogging();
 
-            app.UseHttpsRedirection();
+            if (!env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseRouting();
 
