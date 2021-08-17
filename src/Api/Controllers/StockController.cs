@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DigitalThinkers.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,16 +12,13 @@ namespace DigitalThinkers.Controllers
     [ApiVersion("1.0")]
     public class StockController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<StockController> logger;
+        private readonly IMoneyStore moneyStore;
 
-        public StockController(ILogger<StockController> logger)
+        public StockController(ILogger<StockController> logger, IMoneyStore moneyStore)
         {
             this.logger = logger;
+            this.moneyStore = moneyStore;
         }
 
         [HttpPost]
@@ -41,7 +39,24 @@ namespace DigitalThinkers.Controllers
                 return BadRequest($"Keys {string.Join(',', nonNumericKeys)} are not numbers.");
             }
 
-            return Ok(null);
+            var notes = new Dictionary<uint, uint>();
+
+            foreach (var key in request.Keys)
+            {
+                notes.Add(uint.Parse(key), request[key]);
+            }
+
+            this.logger.LogDebug("Storing notes: {@notes}", notes);
+
+            moneyStore.StoreNotes(notes);
+
+            return Ok(moneyStore.GetNotes());
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(moneyStore.GetNotes());
         }
     }
 }

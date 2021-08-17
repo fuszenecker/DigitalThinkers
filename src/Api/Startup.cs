@@ -1,5 +1,7 @@
 using CorrelationId;
 using CorrelationId.DependencyInjection;
+using DigitalThinkers.Domain.Interfaces;
+using DigitalThinkers.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +63,9 @@ namespace DigitalThinkers
             // Serilog to access the Correlation ID:
             services
                 .AddHttpContextAccessor();
+
+            // For now, it is in-memory:
+            services.AddSingleton<IMoneyStore, MoneyStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
