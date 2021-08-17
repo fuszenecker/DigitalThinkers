@@ -5,37 +5,23 @@ using DigitalThinkers.Domain.Interfaces;
 
 namespace DigitalThinkers.Domain.Services
 {
-    public class InMemoryMonetaryService : IMonetaryService
+    public class PersistentMonetaryService : IMonetaryService
     {
-        private Dictionary<uint, uint> store = new();
-        private readonly object storeLocker = new();
+        private readonly INotesRepository repository;
+
+        public PersistentMonetaryService(INotesRepository repository)
+        {
+            this.repository = repository;
+        }
 
         public void StoreNotes(IDictionary<uint, uint> notes)
         {
-            lock (storeLocker)
-            {
-                foreach (var key in notes.Keys)
-                {
-                    if (store.ContainsKey(key))
-                    {
-                        store[key] += notes[key];
-                    }
-                    else
-                    {
-                        store[key] = notes[key];
-                    }
-                }
-            }
+            this.repository.StoreNotes(notes);
         }
 
         public IDictionary<uint, uint> GetNotes()
         {
-            lock (storeLocker)
-            {
-                // Better to return a copy of a store,
-                // instead of providing a reference to it.
-                return new Dictionary<uint, uint>(store);
-            }
+            return this.repository.GetNotes();
         }
 
         public (string errorMessage, IDictionary<uint, uint> change) Checkout(IDictionary<uint, uint> notes, uint price)
@@ -57,14 +43,15 @@ namespace DigitalThinkers.Domain.Services
                 return ($"More money should be inserted: {price - total} is missing, {total} as inserted.", null);
             }
 
-            lock (storeLocker)
-            {
+            (string errorMessage, IDictionary<uint, uint> change) result = (null, null);
+
+            this.repository.Transaction(() => {
                 // The total amount of money we should give back.
                 var change = total - price;
 
                 // This store will contain all the coins and notes we should give back.
                 // Hypotetically merge the current store and the money coming from customer.
-                var newStore = new Dictionary<uint, uint>(store);
+                var newStore = new Dictionary<uint, uint>(this.repository.GetNotes());
 
                 foreach (var key in notes.Keys)
                 {
@@ -102,14 +89,16 @@ namespace DigitalThinkers.Domain.Services
                 if (change == 0)
                 {
                     // Commit changes:
-                    store = newStore;
-                    return (null, giveBack);
+                    this.repository.StoreNotes(newStore);
+                    result = (null, giveBack);
                 }
                 else
                 {
-                    return ($"Cannot accept money, {change} left.", null);
+                    result = ($"Cannot accept money, {change} left.", null);
                 }
-            }
+            });
+
+            return result;
         }
     }
 }
