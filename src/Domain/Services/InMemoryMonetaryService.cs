@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DigitalThinkers.Domain.Interfaces;
 
 namespace DigitalThinkers.Domain.Services
 {
-    public class MonetaryService : IMonetaryService
+    public class InMemoryMonetaryService : IMonetaryService
     {
         private Dictionary<uint, uint> store = new();
         private readonly object storeLocker = new();
@@ -39,6 +40,11 @@ namespace DigitalThinkers.Domain.Services
 
         public (string errorMessage, IDictionary<uint, uint> change) Checkout(IDictionary<uint, uint> notes, uint price)
         {
+            if (notes is null)
+            {
+                throw new ArgumentNullException(nameof(notes));
+            }
+
             if (price == 0)
             {
                 return ("Proce should not be zero.", null);
@@ -75,20 +81,20 @@ namespace DigitalThinkers.Domain.Services
                 // And calculate ehat to give back:
                 var giveBack = new Dictionary<uint, uint>();
 
-                foreach (var item in newStore)
+                foreach (var item in newStore.Keys.OrderByDescending(v => v))
                 {
-                    while (change >= item.Key && newStore[item.Key] > 0)
+                    while (change >= item && newStore[item] > 0)
                     {
-                        change -= item.Key;
-                        newStore[item.Key]--;
+                        change -= item;
+                        newStore[item]--;
 
-                        if (giveBack.ContainsKey(item.Key))
+                        if (giveBack.ContainsKey(item))
                         {
-                            giveBack[item.Key]++;
+                            giveBack[item]++;
                         }
                         else
                         {
-                            giveBack[item.Key] = 1;
+                            giveBack[item] = 1;
                         }
                     }
                 }

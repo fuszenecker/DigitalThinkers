@@ -13,7 +13,7 @@ namespace tests
         const string serviceBaseUrl = "http://api:5000";
         const string HealthCheckEndpointPath = "/health";
         const string MetricsEndpointPath = "/metrics";
-        
+
         const string CorrelationIdHeaderName = "X-Correlation-ID";
 
         HttpClient httpClient = new HttpClient();
@@ -23,6 +23,7 @@ namespace tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task HealthCheckWorks()
         {
             var result = await httpClient.GetAsync(serviceBaseUrl + HealthCheckEndpointPath);
@@ -32,6 +33,7 @@ namespace tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task MetricsWorks()
         {
             var result = await httpClient.GetAsync(serviceBaseUrl + MetricsEndpointPath);
@@ -44,6 +46,7 @@ namespace tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task CorrelationIdWorks()
         {
             var correlationId = Guid.NewGuid().ToString();

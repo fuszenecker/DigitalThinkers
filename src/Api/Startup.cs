@@ -65,7 +65,7 @@ namespace DigitalThinkers
                 .AddHttpContextAccessor();
 
             // For now, it is in-memory:
-            services.AddSingleton<IMonetaryService, MonetaryService>();
+            services.AddSingleton<IMonetaryService, InMemoryMonetaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
