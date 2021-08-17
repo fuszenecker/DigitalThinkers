@@ -110,7 +110,7 @@ namespace DigitalThinkers.Domain.Services
                 }
                 else
                 {
-                    result = ($"Cannot accept money, {change} left.", null);
+                    result = ($"Cannot accept money, {change} cannot be payed back.", null);
                 }
             });
 

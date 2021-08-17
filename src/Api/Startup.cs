@@ -66,11 +66,12 @@ namespace DigitalThinkers
                 .AddHttpContextAccessor();
 
             // For now, it is in-memory:
-            // services.AddSingleton<IMonetaryService, InMemoryMonetaryService>();
+            services.AddSingleton<IMonetaryService, InMemoryMonetaryService>();
 
-            // For presistent nonetary service:
-            services.AddScoped<INotesRepository, NotesRepository>();
-            services.AddScoped<IMonetaryService, PersistentMonetaryService>();
+            // For presistent nonetary service, uncomment the two lines below,
+            // and comment out the in-memoty one:
+            // services.AddScoped<INotesRepository, NotesRepository>();
+            // services.AddScoped<IMonetaryService, PersistentMonetaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
