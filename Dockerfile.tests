@@ -1,12 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
 
-COPY ["tests/Tests.csproj", "tests/"]
-COPY ["src/Domain/Domain.csproj", "src/Domain/"]
-WORKDIR /src/tests
-RUN dotnet restore "Tests.csproj"
-COPY tests .
+COPY ["src/Domain/", "src/Domain/"]
+COPY ["tests/", "tests/"]
 
 WORKDIR /src/tests
+RUN dotnet restore "Tests.csproj"
 RUN dotnet build "Tests.csproj"
 ENTRYPOINT ["dotnet", "test"]
