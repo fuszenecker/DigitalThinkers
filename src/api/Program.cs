@@ -24,6 +24,7 @@ namespace DigitalThinkers
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
+                    .Enrich.WithCorrelationIdHeader("X-Correlation-ID")
                     .WriteTo.Console())
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
