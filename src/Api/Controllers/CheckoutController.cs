@@ -10,16 +10,16 @@ namespace DigitalThinkers.Controllers
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class WeatherForecastController : ControllerBase
+    public class CheckoutController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<CheckoutController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public CheckoutController(ILogger<CheckoutController> logger)
         {
             _logger = logger;
         }
