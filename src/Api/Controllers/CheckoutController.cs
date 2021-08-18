@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using DigitalThinkers.Contracts;
 using DigitalThinkers.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,8 @@ namespace DigitalThinkers.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Post([FromBody]CheckoutRequest request)
         {
             if (request is null)

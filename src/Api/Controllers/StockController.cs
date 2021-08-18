@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using DigitalThinkers.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,6 +22,8 @@ namespace DigitalThinkers.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Post([FromBody]IDictionary<string, uint> request)
         {
             if (request is null)
@@ -46,6 +49,7 @@ namespace DigitalThinkers.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
         public IActionResult Get()
         {
             return Ok(monetaryService.GetNotes());
