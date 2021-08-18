@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace tests
 {
     [TestClass]
+    [Ignore("Should be moved to a separate project")]
     public class IntegrationTests
     {
         private const string ServiceBaseUrl = "http://api:5000";
