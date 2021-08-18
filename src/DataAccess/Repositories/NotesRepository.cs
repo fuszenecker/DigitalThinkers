@@ -20,6 +20,7 @@ namespace DigitalThinkers.DataAccess.Repositories
             if (context is not null)
             {
                 context.Dispose();
+                GC.SuppressFinalize(this);
                 context = null;
             }
         }

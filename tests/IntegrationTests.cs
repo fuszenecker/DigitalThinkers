@@ -68,7 +68,7 @@ namespace tests
         {
             var result = await httpClient.GetAsync(StockEndpointPath).ConfigureAwait(false);
 
-            var stock = JsonSerializer.Deserialize<Dictionary<uint, uint>>(await result.Content.ReadAsStringAsync());
+            var stock = JsonSerializer.Deserialize<Dictionary<uint, uint>>(await result.Content.ReadAsStringAsync().ConfigureAwait(false));
 
             Assert.AreEqual(System.Net.HttpStatusCode.OK, result.StatusCode);
             Assert.AreEqual(0, stock.Count);
