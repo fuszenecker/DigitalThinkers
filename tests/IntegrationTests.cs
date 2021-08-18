@@ -12,13 +12,13 @@ namespace tests
     [TestClass]
     public class IntegrationTests
     {
-        const string serviceBaseUrl = "http://api:5000";
-        const string HealthCheckEndpointPath = "/health";
-        const string MetricsEndpointPath = "/metrics";
-        const string StockEndpointPath = "/api/v1/Stock";
-        const string CheckoutEndpointPath = "/api/v1/Checkout";
+        private const string ServiceBaseUrl = "http://api:5000";
+        private const string HealthCheckEndpointPath = "/health";
+        private const string MetricsEndpointPath = "/metrics";
+        private const string StockEndpointPath = "/api/v1/Stock";
+        private const string CheckoutEndpointPath = "/api/v1/Checkout";
 
-        const string CorrelationIdHeaderName = "X-Correlation-ID";
+        private const string CorrelationIdHeaderName = "X-Correlation-ID";
 
         private HttpClient httpClient;
 
@@ -26,12 +26,11 @@ namespace tests
         public void Initialize()
         {
             httpClient = new HttpClient() {
-                BaseAddress = new Uri(serviceBaseUrl)
+                BaseAddress = new Uri(ServiceBaseUrl)
             };
         }
 
         [TestMethod]
-        [Ignore]
         public async Task HealthCheckWorks()
         {
             var result = await httpClient.GetAsync(HealthCheckEndpointPath).ConfigureAwait(false);
@@ -41,7 +40,6 @@ namespace tests
         }
 
         [TestMethod]
-        [Ignore]
         public async Task MetricsWorks()
         {
             var result = await httpClient.GetAsync(MetricsEndpointPath).ConfigureAwait(false);
@@ -54,7 +52,6 @@ namespace tests
         }
 
         [TestMethod]
-        [Ignore]
         public async Task CorrelationIdWorks()
         {
             var correlationId = Guid.NewGuid().ToString();
@@ -68,7 +65,6 @@ namespace tests
         }
 
         [TestMethod]
-        [Ignore]
         public async Task GetStock()
         {
             var result = await httpClient.GetAsync(StockEndpointPath).ConfigureAwait(false);
@@ -80,10 +76,9 @@ namespace tests
         }
 
         [TestMethod]
-        [Ignore]
         public async Task PostStock()
         {
-            var json = "{ \"20\": 5, \"1\": 100}";
+            const string json = "{ \"20\": 5, \"1\": 100}";
             var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
             var result = await httpClient.PostAsync(StockEndpointPath, data).ConfigureAwait(false);
@@ -97,10 +92,9 @@ namespace tests
 
 
         [TestMethod]
-        [Ignore]
         public async Task PostBadStock()
         {
-            var json = "{ \"xxx\": 5, \"1\": 100}";
+            const string json = "{ \"xxx\": 5, \"1\": 100}";
             var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
             var result = await httpClient.PostAsync(StockEndpointPath, data).ConfigureAwait(false);
@@ -109,10 +103,9 @@ namespace tests
         }
 
         [TestMethod]
-        [Ignore]
         public async Task CheckoutStock()
         {
-            var json = "{ \"20\": 5, \"1\": 100}";
+            const string json = "{ \"20\": 5, \"1\": 100}";
             var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
             var result = await httpClient.PostAsync(StockEndpointPath, data).ConfigureAwait(false);
@@ -123,7 +116,7 @@ namespace tests
             Assert.AreEqual(System.Net.HttpStatusCode.OK, result.StatusCode);
             Assert.IsTrue(stock.Count > 0);
 
-            var checkoutJson = "{ \"inserted\": {\"20\": 3, \"1\": 100}, \"price\": 50 }";
+            const string checkoutJson = "{ \"inserted\": {\"20\": 3, \"1\": 100}, \"price\": 50 }";
             var checkoutData = new StringContent(checkoutJson, System.Text.Encoding.UTF8, "application/json");
 
             var checkoutResult = await httpClient.PostAsync(CheckoutEndpointPath, checkoutData).ConfigureAwait(false);
