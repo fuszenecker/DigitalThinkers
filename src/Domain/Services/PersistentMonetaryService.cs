@@ -5,7 +5,7 @@ using DigitalThinkers.Domain.Interfaces;
 
 namespace DigitalThinkers.Domain.Services
 {
-    public class PersistentMonetaryService : IMonetaryService
+    public class PersistentMonetaryService : MonetaryServiceBase, IMonetaryService
     {
         private readonly INotesRepository repository;
 
@@ -19,17 +19,7 @@ namespace DigitalThinkers.Domain.Services
             this.repository.Transaction(() => {
                 var newStore = new Dictionary<uint, uint>(this.repository.GetNotes());
 
-                foreach (var key in notes.Keys)
-                {
-                    if (newStore.ContainsKey(key))
-                    {
-                        newStore[key] += notes[key];
-                    }
-                    else
-                    {
-                        newStore[key] = notes[key];
-                    }
-                }
+                MergeNotes(notes, newStore);
 
                 this.repository.StoreNotes(newStore);
             });
@@ -63,46 +53,17 @@ namespace DigitalThinkers.Domain.Services
 
             this.repository.Transaction(() => {
                 // The total amount of money we should give back.
-                var change = total - price;
+                var change = (uint)total - price;
 
                 // This store will contain all the coins and notes we should give back.
                 // Hypotetically merge the current store and the money coming from customer.
                 var newStore = new Dictionary<uint, uint>(this.repository.GetNotes());
 
-                foreach (var key in notes.Keys)
-                {
-                    if (newStore.ContainsKey(key))
-                    {
-                        newStore[key] += notes[key];
-                    }
-                    else
-                    {
-                        newStore[key] = notes[key];
-                    }
-                }
+                MergeNotes(notes, newStore);
 
-                // And calculate ehat to give back:
-                var giveBack = new Dictionary<uint, uint>();
+                var (newChange, giveBack) = PayBack(change, newStore);
 
-                foreach (var item in newStore.Keys.OrderByDescending(v => v))
-                {
-                    while (change >= item && newStore[item] > 0)
-                    {
-                        change -= item;
-                        newStore[item]--;
-
-                        if (giveBack.ContainsKey(item))
-                        {
-                            giveBack[item]++;
-                        }
-                        else
-                        {
-                            giveBack[item] = 1;
-                        }
-                    }
-                }
-
-                if (change == 0)
+                if (newChange == 0)
                 {
                     // Commit changes:
                     this.repository.StoreNotes(newStore);
@@ -110,7 +71,7 @@ namespace DigitalThinkers.Domain.Services
                 }
                 else
                 {
-                    result = ($"Cannot accept money, {change} cannot be paid back.", null);
+                    result = ($"Cannot accept money, {newChange} cannot be paid back.", null);
                 }
             });
 

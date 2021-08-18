@@ -31,6 +31,7 @@ namespace tests
         }
 
         [TestMethod]
+        // [Ignore]
         public async Task HealthCheckWorks()
         {
             var result = await httpClient.GetAsync(HealthCheckEndpointPath).ConfigureAwait(false);
@@ -40,6 +41,7 @@ namespace tests
         }
 
         [TestMethod]
+        // [Ignore]
         public async Task MetricsWorks()
         {
             var result = await httpClient.GetAsync(MetricsEndpointPath).ConfigureAwait(false);
@@ -52,6 +54,7 @@ namespace tests
         }
 
         [TestMethod]
+        // [Ignore]
         public async Task CorrelationIdWorks()
         {
             var correlationId = Guid.NewGuid().ToString();
@@ -65,6 +68,7 @@ namespace tests
         }
 
         [TestMethod]
+        // [Ignore]
         public async Task GetStock()
         {
             var result = await httpClient.GetAsync(StockEndpointPath).ConfigureAwait(false);
@@ -76,6 +80,7 @@ namespace tests
         }
 
         [TestMethod]
+        // [Ignore]
         public async Task PostStock()
         {
             var json = "{ \"20\": 5, \"1\": 100}";
@@ -92,6 +97,7 @@ namespace tests
 
 
         [TestMethod]
+        // [Ignore]
         public async Task PostBadStock()
         {
             var json = "{ \"xxx\": 5, \"1\": 100}";
@@ -103,6 +109,7 @@ namespace tests
         }
 
         [TestMethod]
+        // [Ignore]
         public async Task CheckoutStock()
         {
             var json = "{ \"20\": 5, \"1\": 100}";
