@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DigitalThinkers.DataAccess.Contexts;
 using DigitalThinkers.DataAccess.Entities;
 using DigitalThinkers.Domain.Interfaces;
@@ -9,7 +8,7 @@ namespace DigitalThinkers.DataAccess.Repositories
 {
     public class NotesRepository : INotesRepository, IDisposable
     {
-        private NotesContext context = new NotesContext();
+        private NotesContext context = new();
 
         public NotesRepository()
         {

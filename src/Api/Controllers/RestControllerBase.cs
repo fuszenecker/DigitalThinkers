@@ -9,7 +9,7 @@ namespace DigitalThinkers.Controllers
     {
         protected IEnumerable<string> GetNonNumericKeys(IDictionary<string, uint> collection)
         {
-            return collection.Keys?.Where(k => !uint.TryParse(k, out var _));
+            return collection.Keys.Where(k => !uint.TryParse(k, out var _));
         }
 
         protected Dictionary<uint, uint> MapNotes(IDictionary<string, uint> values)

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace tests
@@ -89,7 +88,6 @@ namespace tests
             Assert.AreEqual(System.Net.HttpStatusCode.OK, result.StatusCode);
             Assert.IsTrue(stock.Count > 0);
         }
-
 
         [TestMethod]
         public async Task PostBadStock()

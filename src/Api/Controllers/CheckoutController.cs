@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DigitalThinkers.Contracts;
 using DigitalThinkers.Domain.Interfaces;
@@ -62,7 +61,7 @@ namespace DigitalThinkers.Controllers
 
             if (string.IsNullOrWhiteSpace(errorMessage))
             {
-                this.logger.LogInformation("Successfully payd {proce}.", request.Price);
+                this.logger.LogInformation("Successfully paid {price}.", request.Price);
                 return Ok(change);
             }
             else
