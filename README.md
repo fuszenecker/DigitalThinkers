@@ -45,9 +45,9 @@ There are two implementations:
 Technologies:
 
 * Dotnet Core 5 WebAPI
-* Swagger for interface description and visualization
+* Swagger for interface description and visualization (`/swagger`)
 * Docker and docker-compose
 * Entity Framework Core with SQLite
 * Serilog structured logging (console logger)
-* Prometheus.NET for metrics
-* Correlation ID middleware
+* Prometheus.NET for metrics (`/metrics`)
+* Correlation ID middleware (`X-Correlation-ID` in header)
