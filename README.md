@@ -1,5 +1,11 @@
 # Digital Thinkers test excercise
 
+[![.NET](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/dotnet.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/dotnet.yml)
+[![CodeQL](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/codeql-analysis.yml)
+[![Docker Image CI](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/docker-image.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/docker-image.yml)
+
+## How to rin the solution
+
 You might want to install [.NET Core SDK 5](https://dotnet.microsoft.com/download/dotnet/5.0) first.
 
 The service can be started
@@ -42,7 +48,7 @@ There are two implementations:
 1. The in-memory store, this is the default, as it is highly tested by unit tests,
 2. and the persistent one (SQlite), it can be enabled by editing the `Startup.cs` in `src/Api`.
 
-Technologies:
+## Technologies involved
 
 * Dotnet Core 5 WebAPI
 * Swagger for interface description and visualization (`/swagger`)
