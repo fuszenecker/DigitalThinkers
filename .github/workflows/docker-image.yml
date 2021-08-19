@@ -17,3 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag digitalthinks:$(date +%s)
       working-directory: src
+    - name: DockerHub Build And Push
+      uses: Abhishek-070/Dockerhub-Build-Push@v1.0
+      working-directory: src
+  
