@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-
+    <NSwagExe>nswag</NSwagExe>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -17,4 +17,8 @@
     <ProjectReference Include="..\src\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent"> -->
+  <Target Name="GenerateClient">
+      <Exec Command="$(NSwagExe) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
+  </Target>
 </Project>

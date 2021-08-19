@@ -5,7 +5,7 @@ using DigitalThinkers.Domain.Interfaces;
 using DigitalThinkers.Domain.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace tests
+namespace Tests
 {
     [TestClass]
     public class UnitTests
