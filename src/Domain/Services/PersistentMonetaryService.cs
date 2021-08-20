@@ -1,40 +1,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DigitalThinkers.Domain.Entities;
 using DigitalThinkers.Domain.Interfaces;
 
 namespace DigitalThinkers.Domain.Services
 {
     public class PersistentMonetaryService : MonetaryServiceBase, IMonetaryService
     {
-        private readonly INotesRepository repository;
+        private readonly ICoinsRepository repository;
 
-        public PersistentMonetaryService(INotesRepository repository)
+        public PersistentMonetaryService(ICoinsRepository repository)
         {
             this.repository = repository;
         }
 
-        public void StoreNotes(IDictionary<uint, uint> notes)
+        public void StoreCoins(CoinCollection notes)
         {
             this.repository.Transaction(() => {
-                var newStore = new Dictionary<uint, uint>(this.repository.GetNotes());
+                var newStore = new CoinCollection(this.repository.GetCoins());
 
-                MergeNotes(notes, newStore);
+                MergeCoins(notes, newStore);
 
-                this.repository.StoreNotes(newStore);
+                this.repository.StoreCoins(newStore);
             });
         }
 
-        public IDictionary<uint, uint> GetNotes()
+        public CoinCollection GetCoins()
         {
-            return this.repository.GetNotes();
+            return this.repository.GetCoins();
         }
 
-        public (string errorMessage, IDictionary<uint, uint> change) Checkout(IDictionary<uint, uint> notes, uint price)
+        public (string errorMessage, CoinCollection change) Checkout(CoinCollection coins, uint price)
         {
-            if (notes is null)
+            if (coins is null)
             {
-                throw new ArgumentNullException(nameof(notes));
+                throw new ArgumentNullException(nameof(coins));
             }
 
             if (price == 0)
@@ -42,40 +43,48 @@ namespace DigitalThinkers.Domain.Services
                 return ("Proce should not be zero.", null);
             }
 
-            var total = notes.Sum(n => n.Key * n.Value);
-
-            if (total < price)
+            try 
             {
-                return ($"More money should be inserted: {price - total} is missing, {total} is inserted.", null);
+                var total = coins.Sum(n => n.Key * n.Value);
+
+                if (total < price)
+                {
+                    return ($"More money should be inserted: {price - total} is missing, {total} is inserted.", null);
+                }
+
+                (string errorMessage, CoinCollection change) result = (null, null);
+
+                this.repository.Transaction(() => {
+                    // The total amount of money we should give back.
+                    var change = (uint)total - price;
+
+                    // This store will contain all the coins and notes we should give back.
+                    // Hypotetically merge the current store and the money coming from customer.
+                    var newStore = new CoinCollection(this.repository.GetCoins());
+
+                    MergeCoins(coins, newStore);
+
+                    var (newChange, giveBack) = CalculatePayBack(change, newStore);
+
+                    if (newChange == 0)
+                    {
+                        // Commit changes:
+                        this.repository.StoreCoins(newStore);
+                        result = (null, giveBack);
+                    }
+                    else
+                    {
+                        result = ($"Cannot accept money, {newChange} cannot be paid back.", null);
+                    }
+
+                });
+                
+                return result;
             }
-
-            (string errorMessage, IDictionary<uint, uint> change) result = (null, null);
-
-            this.repository.Transaction(() => {
-                // The total amount of money we should give back.
-                var change = (uint)total - price;
-
-                // This store will contain all the coins and notes we should give back.
-                // Hypotetically merge the current store and the money coming from customer.
-                var newStore = new Dictionary<uint, uint>(this.repository.GetNotes());
-
-                MergeNotes(notes, newStore);
-
-                var (newChange, giveBack) = PayBack(change, newStore);
-
-                if (newChange == 0)
-                {
-                    // Commit changes:
-                    this.repository.StoreNotes(newStore);
-                    result = (null, giveBack);
-                }
-                else
-                {
-                    result = ($"Cannot accept money, {newChange} cannot be paid back.", null);
-                }
-            });
-
-            return result;
+            catch (OverflowException ex)
+            {
+                return ($"Exception happened during calculation: {ex.Message}", null);
+            }
         }
     }
 }

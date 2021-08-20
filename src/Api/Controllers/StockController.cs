@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using DigitalThinkers.Contracts;
 using DigitalThinkers.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,7 +25,7 @@ namespace DigitalThinkers.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult Post([FromBody]IDictionary<string, uint> request)
+        public IActionResult Post([FromBody]CoinCollection request)
         {
             if (request is null)
             {
@@ -41,18 +42,18 @@ namespace DigitalThinkers.Controllers
                 return BadRequest($"Keys {string.Join(',', nonNumericKeys)} are not numbers.");
             }
 
-            var notes = MapNotes(request);
-            this.logger.LogDebug("Storing notes: {@notes}", notes);
-            monetaryService.StoreNotes(notes);
+            var coins = MapCoins(request);
+            this.logger.LogDebug("Storing coins: {@coins}", coins);
+            monetaryService.StoreCoins(coins);
 
-            return Ok(monetaryService.GetNotes());
+            return Ok(monetaryService.GetCoins());
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CoinCollection), (int)HttpStatusCode.OK)]
         public IActionResult Get()
         {
-            return Ok(monetaryService.GetNotes());
+            return Ok(monetaryService.GetCoins());
         }
     }
 }
