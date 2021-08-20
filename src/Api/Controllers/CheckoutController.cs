@@ -56,11 +56,11 @@ namespace DigitalThinkers.Controllers
                 return BadRequest(message);
             }
 
-            var notes = MapNotes(request.Inserted);
+            var coins = MapCoins(request.Inserted);
 
-            this.logger.LogDebug("Trying to pay {price} with {@notes}.", request.Price, notes);
+            this.logger.LogDebug("Trying to pay {price} with {@coins}.", request.Price, coins);
 
-            var (errorMessage, change) = monetaryService.Checkout(notes, request.Price);
+            var (errorMessage, change) = monetaryService.Checkout(coins, request.Price);
 
             if (string.IsNullOrWhiteSpace(errorMessage))
             {

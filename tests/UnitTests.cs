@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DigitalThinkers.Domain.Entities;
 using DigitalThinkers.Domain.Interfaces;
 using DigitalThinkers.Domain.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -20,22 +21,22 @@ namespace Tests
         [TestMethod]
         public void EmptyMonetaryService()
         {
-            Assert.AreEqual(0, monetaryService.GetNotes().Keys.Count);
+            Assert.AreEqual(0, monetaryService.GetCoins().Keys.Count);
         }
 
         [TestMethod]
         public void InsertMonetaryService()
         {
-            monetaryService.StoreNotes(new Dictionary<uint, uint> {
+            monetaryService.StoreCoins(new CoinCollection {
                 {5, 1},
                 {1, 5},
                 {11, 3}
             });
 
-            Assert.AreEqual(3, monetaryService.GetNotes().Keys.Count);
-            Assert.AreEqual(1u, monetaryService.GetNotes()[5]);
-            Assert.AreEqual(5u, monetaryService.GetNotes()[1]);
-            Assert.AreEqual(3u, monetaryService.GetNotes()[11]);
+            Assert.AreEqual(3, monetaryService.GetCoins().Keys.Count);
+            Assert.AreEqual(1u, monetaryService.GetCoins()[5]);
+            Assert.AreEqual(5u, monetaryService.GetCoins()[1]);
+            Assert.AreEqual(3u, monetaryService.GetCoins()[11]);
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace Tests
         [TestMethod]
         public void CheckoutEmptyInsertedMonetaryService()
         {
-            var (errorMessage, change) = monetaryService.Checkout(new Dictionary<uint, uint>(), 100);
+            var (errorMessage, change) = monetaryService.Checkout(new (), 100);
 
             Assert.IsNotNull(errorMessage);
             Assert.IsNull(change);
@@ -56,7 +57,7 @@ namespace Tests
         [TestMethod]
         public void CheckoutTrivialInsertedMonetaryService()
         {
-            var (errorMessage, change) = monetaryService.Checkout(new Dictionary<uint, uint> {
+            var (errorMessage, change) = monetaryService.Checkout(new CoinCollection {
                 { 100, 1}
             }, 100);
 
@@ -70,7 +71,7 @@ namespace Tests
         [TestMethod]
         public void CheckoutEqualInsertedMonetaryService()
         {
-            var (errorMessage, change) = monetaryService.Checkout(new Dictionary<uint, uint> {
+            var (errorMessage, change) = monetaryService.Checkout(new CoinCollection {
                 { 10, 1},
                 { 90, 1}
             }, 100);
@@ -85,7 +86,7 @@ namespace Tests
         [TestMethod]
         public void CheckoutMoreInsertedMonetaryService()
         {
-            var (errorMessage, change) = monetaryService.Checkout(new Dictionary<uint, uint> {
+            var (errorMessage, change) = monetaryService.Checkout(new CoinCollection {
                 { 10, 1},
                 { 90, 1}
             }, 90);
@@ -102,11 +103,11 @@ namespace Tests
         [TestMethod]
         public void CheckoutAndStoreMonetaryService()
         {
-            monetaryService.StoreNotes(new Dictionary<uint, uint> {
+            monetaryService.StoreCoins(new CoinCollection {
                 { 10, 200 }
             });
 
-            var (errorMessage, change) = monetaryService.Checkout(new Dictionary<uint, uint> {
+            var (errorMessage, change) = monetaryService.Checkout(new CoinCollection {
                 { 1000, 1}
             }, 200);
 
@@ -122,12 +123,12 @@ namespace Tests
         [TestMethod]
         public void CheckoutAndStoreComplexMonetaryService()
         {
-            monetaryService.StoreNotes(new Dictionary<uint, uint> {
+            monetaryService.StoreCoins(new CoinCollection {
                 { 10, 20 },
                 { 50, 8 }
             });
 
-            var (errorMessage, change) = monetaryService.Checkout(new Dictionary<uint, uint> {
+            var (errorMessage, change) = monetaryService.Checkout(new CoinCollection {
                 { 500, 1},
                 { 100, 1}
             }, 200);

@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using DigitalThinkers.DataAccess.Contexts;
 using DigitalThinkers.DataAccess.Entities;
+using DigitalThinkers.Domain.Entities;
 using DigitalThinkers.Domain.Interfaces;
 
 namespace DigitalThinkers.DataAccess.Repositories
 {
-    public class NotesRepository : INotesRepository, IDisposable
+    public class CoinsRepository : ICoinsRepository, IDisposable
     {
-        private NotesContext context = new();
+        private CoinsContext context = new();
 
-        public NotesRepository()
+        public CoinsRepository()
         {
             this.context.Database.EnsureCreated();
         }
@@ -25,32 +26,32 @@ namespace DigitalThinkers.DataAccess.Repositories
             }
         }
 
-        public IDictionary<uint, uint> GetNotes()
+        public CoinCollection GetCoins()
         {
-            var result = new Dictionary<uint, uint>();
+            var result = new CoinCollection();
 
-            foreach (var note in context.Notes)
+            foreach (var coin in context.Coins)
             {
-                result[note.Denominator] = note.Count;
+                result[coin.Denominator] = coin.Count;
             }
 
             return result;
         }
 
-        public void StoreNotes(IDictionary<uint, uint> notes)
+        public void StoreCoins(CoinCollection coins)
         {
             // Delete all existing items, and add the new items,
-            foreach (var item in context.Notes)
+            foreach (var item in context.Coins)
             {
-                context.Notes.Remove(item);
+                context.Coins.Remove(item);
             }
 
-            foreach (var note in notes)
+            foreach (var coin in coins)
             {
-                context.Notes.Add(new Note()
+                context.Coins.Add(new Coin()
                 {
-                    Denominator = note.Key,
-                    Count = note.Value
+                    Denominator = coin.Key,
+                    Count = coin.Value
                 });
             }
 

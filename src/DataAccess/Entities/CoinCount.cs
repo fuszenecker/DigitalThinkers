@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DigitalThinkers.DataAccess.Entities
 {
-    public class Note
+    public class CoinCount
     {
         [Key]
         public uint Denominator { get; set; }

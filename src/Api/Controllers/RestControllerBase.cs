@@ -1,32 +1,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DigitalThinkers.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalThinkers.Controllers
 {
     public class RestControllerBase : ControllerBase
     {
-        protected IEnumerable<string> GetNonNumericKeys(IDictionary<string, uint> collection)
+        protected IEnumerable<string> GetNonNumericKeys(Contracts.CoinCollection collection)
         {
             return collection.Keys.Where(k => !uint.TryParse(k, out var _));
         }
 
-        protected Dictionary<uint, uint> MapNotes(IDictionary<string, uint> values)
+        protected Domain.Entities.CoinCollection MapCoins(Contracts.CoinCollection coins)
         {
-            if (values == null)
+            if (coins == null)
             {
-                throw new ArgumentNullException(nameof(values));
+                throw new ArgumentNullException(nameof(coins));
             }
 
-            var notes = new Dictionary<uint, uint>();
+            var mappedCoins = new Domain.Entities.CoinCollection();
 
-            foreach (var key in values.Keys)
+            foreach (var key in coins.Keys)
             {
-                notes.Add(uint.Parse(key), values[key]);
+                mappedCoins.Add(uint.Parse(key), coins[key]);
             }
 
-            return notes;
+            return mappedCoins;
         }
     }
 }

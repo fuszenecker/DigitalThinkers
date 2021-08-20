@@ -1,13 +1,13 @@
-using System.Collections.Generic;
+using DigitalThinkers.Domain.Entities;
 
 namespace DigitalThinkers.Domain.Interfaces
 {
     public interface IMonetaryService
     {
-        void StoreNotes(IDictionary<uint, uint> notes);
+        void StoreCoins(CoinCollection coins);
 
-        IDictionary<uint, uint> GetNotes();
+        CoinCollection GetCoins();
 
-        (string errorMessage, IDictionary<uint, uint> change) Checkout(IDictionary<uint, uint> notes, uint price);
+        (string errorMessage, CoinCollection change) Checkout(CoinCollection coins, uint price);
     }
 }
