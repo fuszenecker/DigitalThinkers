@@ -96,6 +96,16 @@ namespace Tests
         }
 
         [TestMethod]
+        public async Task PostOverflowStock()
+        {
+            await Assert.ThrowsExceptionAsync<ApiException>(async () =>
+                await serviceClient.StockPOSTAsync(new Dictionary<string, int> {
+                    { "4300000000", 1 },
+                    { "1", 100 }
+                }).ConfigureAwait(false)).ConfigureAwait(false);
+        }
+
+        [TestMethod]
         public async Task CheckoutStock()
         {
             var result = await serviceClient.StockPOSTAsync(new Dictionary<string, int> {
