@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <NSwagExe>nswag</NSwagExe>
+    <NSwagDll>/usr/lib/node_modules/nswag/bin/binaries/Net50/dotnet-nswag.dll</NSwagDll>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -19,6 +20,8 @@
 
   <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent"> -->
   <Target Name="GenerateClient">
-      <Exec Command="$(NSwagExe) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
+      <Message Importance="high" Text="Generating service client..." />
+      <!-- <Exec Command="$(NSwagExe) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" /> -->
+      <Exec Command="dotnet $(NSwagDll) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
   </Target>
 </Project>
