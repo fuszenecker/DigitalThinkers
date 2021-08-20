@@ -48,7 +48,7 @@ namespace DigitalThinkers.DataAccess.Repositories
 
             foreach (var coin in coins)
             {
-                context.Coins.Add(new Coin()
+                context.Coins.Add(new CoinCount()
                 {
                     Denominator = coin.Key,
                     Count = coin.Value
