@@ -4,7 +4,7 @@
 [![CodeQL](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/codeql-analysis.yml)
 [![Docker Image CI](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/docker-image.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/docker-image.yml)
 
-## How to rin the solution
+## How to run the solution
 
 You might want to install [.NET Core SDK 5](https://dotnet.microsoft.com/download/dotnet/5.0) first, and `sudo npm install nswag -g` next.
 
