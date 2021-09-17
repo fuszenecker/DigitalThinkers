@@ -45,7 +45,7 @@ service:
     prometheus.io/path: "/metrics"
 
 ingress:
-  enabled: true
+  enabled: false
   annotations:
     cert-manager.io/issuer: "letsencrypt-prod"
     kubernetes.io/ingress.class: nginx
