@@ -24,5 +24,4 @@ RUN dotnet publish "Api/DigitalThinkers.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=30 CMD curl http://localhost:5000/health
 ENTRYPOINT ["dotnet", "DigitalThinkers.dll"]

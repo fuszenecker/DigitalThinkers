@@ -10,7 +10,7 @@ namespace DigitalThinkers.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1.0")]
+    [ApiVersion("1")]
     public class StockController : RestControllerBase
     {
         private readonly ILogger<StockController> logger;
@@ -22,6 +22,10 @@ namespace DigitalThinkers.Controllers
             this.monetaryService = monetaryService;
         }
 
+        /// <summary>
+        /// Insert additional coins to the machine.
+        /// </summary>
+        /// <param name="request">The DTO for coins to be inserted.</param>
         [HttpPost]
         [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -49,6 +53,9 @@ namespace DigitalThinkers.Controllers
             return Ok(monetaryService.GetCoins());
         }
 
+        /// <summary>
+        /// Gets the coin state from the machine.
+        /// </summary>
         [HttpGet]
         [ProducesResponseType(typeof(CoinCollection), (int)HttpStatusCode.OK)]
         public IActionResult Get()

@@ -10,7 +10,7 @@ namespace DigitalThinkers.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1.0")]
+    [ApiVersion("2")]
     public class CheckoutController : RestControllerBase
     {
         private readonly ILogger<CheckoutController> logger;
@@ -22,6 +22,10 @@ namespace DigitalThinkers.Controllers
             this.monetaryService = monetaryService;
         }
 
+        /// <summary>
+        /// Checkiut: tell the price and insert coins to the machine.
+        /// </summary>
+        /// <param name="request">The DTO for coins to be inserted.</param>
         [HttpPost]
         [ProducesResponseType(typeof(Dictionary<string, uint>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

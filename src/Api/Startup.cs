@@ -1,12 +1,15 @@
+using System;
+using System.IO;
+using System.Reflection;
 using CorrelationId;
 using CorrelationId.DependencyInjection;
-using DigitalThinkers.DataAccess.Repositories;
 using DigitalThinkers.Domain.Interfaces;
 using DigitalThinkers.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,19 +38,29 @@ namespace DigitalThinkers
 
             services.AddApiVersioning(config =>
             {
+                config.ReportApiVersions = true;
+                config.AssumeDefaultVersionWhenUnspecified = true;
                 config.DefaultApiVersion = new ApiVersion(1, 0);
-                config.AssumeDefaultVersionWhenUnspecified = false;
-                config.ReportApiVersions = false;
+                config.ApiVersionReader = new UrlSegmentApiVersionReader();
             });
 
             services.AddVersionedApiExplorer(setup =>
             {
                 setup.GroupNameFormat = "'v'VVV";
+                setup.DefaultApiVersion = new ApiVersion(1, 0);
                 setup.SubstituteApiVersionInUrl = true;
             });
 
             services
-                .AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "DigitalThinkers", Version = "v1" }));
+                .AddSwaggerGen(c => {
+                    // FIXME: works, but not the best solution:
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DigitalThinkers", Version = "v1" });
+                    c.SwaggerDoc("v2", new OpenApiInfo { Title = "DigitalThinkers", Version = "v2" });
+
+                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    c.IncludeXmlComments(xmlPath);
+                });
 
             services
                 .AddHttpClient(Options.DefaultName)
@@ -80,7 +93,6 @@ namespace DigitalThinkers
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DigitalThinkers homework API v1"));
 
                 app.UseSwaggerUI(options =>
                 {
