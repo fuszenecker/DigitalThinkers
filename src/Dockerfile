@@ -1,3 +1,6 @@
+
+# ----- Dotnet build -----
+
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal AS base
 WORKDIR /app
 EXPOSE 5000
@@ -21,7 +24,19 @@ RUN dotnet build "Api/DigitalThinkers.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "Api/DigitalThinkers.csproj" -c Release -o /app/publish
 
+# ----- Node build -----
+
+FROM node as node-build
+WORKDIR /src
+COPY ui/package.json /src
+RUN npm install
+COPY ui/ /src
+RUN npm run build
+
+# ----- Final image -----
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=node-build /src/build/ /ui/build/
 ENTRYPOINT ["dotnet", "DigitalThinkers.dll"]
