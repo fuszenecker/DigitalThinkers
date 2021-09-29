@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { useInjection } from 'inversify-react';
+import Backend from './services/Backend';
 
 function App() {
+  const [coinsState, setCoinState] = useState({} as any)
+  const [reload, setReload] = useState(true)
+  const backend = useInjection(Backend)
+
+  useEffect(() => {
+    if (reload) {
+      backend.getCoins().then(result => {
+        setReload(false)
+        setCoinState(result)
+      })
+    }
+  })
+
+  const elements = []
+  console.log("Coins: " + JSON.stringify(coinsState))
+
+  for (const key in coinsState) {
+    if (coinsState.hasOwnProperty(key)) {
+      const element: any = coinsState[key];
+      
+      console.log(`${key} --> ${element}`)
+      elements.push(<div>{key}: {element}</div>)
+    }
+  }  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {elements}
     </div>
   );
 }

@@ -4,9 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'inversify-react';
+import setupContainer from './setupContainer';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider container={setupContainer}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

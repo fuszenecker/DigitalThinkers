@@ -115,6 +115,12 @@ namespace DigitalThinkers
                 app.UseHttpsRedirection();
             }
 
+            app.UseCors(options => {
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+                options.AllowAnyOrigin();
+            });
+
             app.UseRouting();
             app.UseHttpMetrics();
             app.UseAuthorization();
