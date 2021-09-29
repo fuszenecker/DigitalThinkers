@@ -3,3 +3,4 @@
 **/*testlog*
 **/*cache*
 **/*.db
+**/node_modules
