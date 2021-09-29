@@ -19,7 +19,6 @@ function App() {
     }
   })
 
-  console.log("Coins: " + JSON.stringify(coinsState))
   const rows = []
 
   for (const key in coinsState) {
