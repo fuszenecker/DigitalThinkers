@@ -6,7 +6,7 @@
 
 ## How to run the solution
 
-You might want to install [.NET Core SDK 5](https://dotnet.microsoft.com/download/dotnet/5.0) first, and `sudo npm install nswag -g` next.
+You might want to install [.NET Core SDK 6](https://dotnet.microsoft.com/download/dotnet/6.0) first, and `sudo npm install nswag -g` next.
 
 The service can be started
 
@@ -25,7 +25,7 @@ The service can be started
 2. Or you can start the service and run the tests with means of `docker-compose`:
 
     ```text
-    docker-compose up --build
+    docker-compose up --build --abort-on-container-exit
     ```
 
     Unfortunately, on Linux, the stable `docker-compose` is quite old, so it doesn't support `service_started`:
@@ -50,7 +50,7 @@ There are two implementations:
 
 ## Technologies involved
 
-* Dotnet Core 5 WebAPI
+* ASP.NET Core 6 WebAPI
 * Swagger for interface description and visualization (`/swagger`)
 * Docker and docker-compose
 * Entity Framework Core with SQLite
