@@ -6,7 +6,7 @@ namespace DigitalThinkers.DataAccess.Contexts
     public class CoinsContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source=notes.db");
+            => options.UseSqlite($"Data Source=coins.db");
 
         public DbSet<CoinCount> Coins { get; set; }
     }

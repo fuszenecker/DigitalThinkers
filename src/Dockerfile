@@ -1,7 +1,6 @@
+# ----- Base image -----
 
-# ----- Dotnet build -----
-
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 5000
 
@@ -12,31 +11,24 @@ ENV ASPNETCORE_URLS=http://+:5000
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
+# ----- Build image -----
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS dotnet-build
 WORKDIR /src
 COPY ["Api/DigitalThinkers.csproj", "Api/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
+COPY ["UnitTests/UnitTests.csproj", "UnitTests/"]
 RUN dotnet restore "Api/DigitalThinkers.csproj"
+RUN dotnet restore "UnitTests/UnitTests.csproj"
 COPY . .
 RUN dotnet build "Api/DigitalThinkers.csproj" -c Release -o /app/build
-
-FROM build AS publish
+RUN dotnet test "UnitTests/UnitTests.csproj" -c Release
 RUN dotnet publish "Api/DigitalThinkers.csproj" -c Release -o /app/publish
-
-# ----- Node build -----
-
-FROM node as node-build
-WORKDIR /src
-COPY ui/package.json /src
-RUN npm install
-COPY ui/ /src
-RUN npm run build
 
 # ----- Final image -----
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-COPY --from=node-build /src/build/ /ui/build/
+COPY --from=dotnet-build /app/publish .
 ENTRYPOINT ["dotnet", "DigitalThinkers.dll"]
