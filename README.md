@@ -50,7 +50,7 @@ There are two implementations:
 
 ## Technologies involved
 
-* Dotnet Core 5 WebAPI
+* ASP.NET Core 6 WebAPI
 * Swagger for interface description and visualization (`/swagger`)
 * Docker and docker-compose
 * Entity Framework Core with SQLite
