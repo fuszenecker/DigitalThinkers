@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <NSwagExe>nswag</NSwagExe>
     <NSwagDll>/usr/lib/node_modules/nswag/bin/binaries/Net50/dotnet-nswag.dll</NSwagDll>
     <IsPackable>false</IsPackable>
@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent"> -->
+  <!-- sudo npm install -g nswag -->
   <Target Name="GenerateClient">
       <Message Importance="high" Text="Generating service client..." />
       <Exec Command="dotnet $(NSwagDll) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
