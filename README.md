@@ -25,7 +25,7 @@ The service can be started
 2. Or you can start the service and run the tests with means of `docker-compose`:
 
     ```text
-    docker-compose up --build
+    docker-compose up --build --abort-on-container-exit
     ```
 
     Unfortunately, on Linux, the stable `docker-compose` is quite old, so it doesn't support `service_started`:
