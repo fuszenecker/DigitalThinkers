@@ -7,11 +7,27 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/api/DigitalThinkers.csproj",
+                "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/src/UnitTests/UnitTests.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
         },
         {
             "label": "publish",
@@ -19,7 +35,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/DigitalThinkers.csproj",
+                "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +48,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/DigitalThinkers.csproj",
+                "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -47,12 +63,12 @@
             "dockerBuild": {
                 "tag": "digitalthinkers:dev",
                 "target": "base",
-                "dockerfile": "${workspaceFolder}/src/api/Dockerfile",
-                "context": "${workspaceFolder}",
+                "dockerfile": "${workspaceFolder}/src/Dockerfile",
+                "context": "${workspaceFolder}/src",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/src/api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
             }
         },
         {
@@ -63,12 +79,12 @@
             ],
             "dockerBuild": {
                 "tag": "digitalthinkers:latest",
-                "dockerfile": "${workspaceFolder}/src/api/Dockerfile",
-                "context": "${workspaceFolder}",
+                "dockerfile": "${workspaceFolder}/src/Dockerfile",
+                "context": "${workspaceFolder}/src",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/src/api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
             }
         },
         {
@@ -79,7 +95,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/src/api/DigitalThinkers.csproj",
+                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
                 "enableDebugging": true
             }
         },
@@ -91,7 +107,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/src/api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
             }
         }
     ]

@@ -14,14 +14,9 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\Domain\Domain.csproj" />
-  </ItemGroup>
-
   <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent"> -->
   <Target Name="GenerateClient">
       <Message Importance="high" Text="Generating service client..." />
-      <!-- <Exec Command="$(NSwagExe) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" /> -->
       <Exec Command="dotnet $(NSwagDll) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
   </Target>
 </Project>

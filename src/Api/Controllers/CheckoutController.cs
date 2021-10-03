@@ -10,7 +10,8 @@ namespace DigitalThinkers.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("2")]
+    [ApiVersion("1")]
+    // [ApiVersion("2")]
     public class CheckoutController : RestControllerBase
     {
         private readonly ILogger<CheckoutController> logger;

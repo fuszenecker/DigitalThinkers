@@ -125,12 +125,12 @@ namespace DigitalThinkers
             app.UseHttpMetrics();
             app.UseAuthorization();
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "../ui/build")),
-                RequestPath = "/ui"
-            });
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            //         Path.Combine(env.ContentRootPath, "../ui/build")),
+            //     RequestPath = "/ui"
+            // });
 
             app.UseEndpoints(endpoints =>
             {
