@@ -6,7 +6,7 @@
 
 ## How to run the solution
 
-You might want to install [.NET Core SDK 5](https://dotnet.microsoft.com/download/dotnet/5.0) first, and `sudo npm install nswag -g` next.
+You might want to install [.NET Core SDK 6](https://dotnet.microsoft.com/download/dotnet/6.0) first, and `sudo npm install nswag -g` next.
 
 The service can be started
 
