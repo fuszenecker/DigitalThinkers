@@ -18,11 +18,12 @@ services:
   integrationtests:
     image: integrationtests
     build:
-      context: .
-      dockerfile: Dockerfile.tests
+      context: tests
+      dockerfile: Dockerfile
     depends_on:
-      - api:
-          condition: service_started
+      # - api:
+      #    condition: service_started
+      - api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
