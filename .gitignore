@@ -1,0 +1,6 @@
+**/obj
+**/bin
+**/*testlog*
+**/*cache*
+**/*.db
+**/node_modules
