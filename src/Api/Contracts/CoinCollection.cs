@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DigitalThinkers.Contracts
+namespace ServiceTemplate.Contracts
 {
     public class CoinCollection : Dictionary<string, uint>
     {

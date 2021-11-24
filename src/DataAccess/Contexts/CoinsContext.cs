@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using DigitalThinkers.DataAccess.Entities;
+using ServiceTemplate.DataAccess.Entities;
 
-namespace DigitalThinkers.DataAccess.Contexts
+namespace ServiceTemplate.DataAccess.Contexts
 {
     public class CoinsContext : DbContext
     {

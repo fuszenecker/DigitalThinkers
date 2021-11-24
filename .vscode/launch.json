@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Api/bin/Debug/net6/DigitalThinkers.dll",
+            "program": "${workspaceFolder}/src/Api/bin/Debug/net6/ServiceTemplate.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -33,7 +33,7 @@
             "request": "launch",
             "preLaunchTask": "docker-run: debug",
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/ServiceTemplate.csproj"
             }
         }
     ]

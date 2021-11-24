@@ -18,6 +18,6 @@
   <!-- sudo npm install -g nswag -->
   <Target Name="GenerateClient">
       <Message Importance="high" Text="Generating service client..." />
-      <Exec Command="dotnet $(NSwagDll) openapi2csclient /name:ServiceClient /namespace:DigitalThinkers /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
+      <Exec Command="dotnet $(NSwagDll) openapi2csclient /name:ServiceClient /namespace:ServiceTemplate /input:http://localhost:5000/swagger/v1/swagger.yaml /output:$(ProjectDir)ServiceClient.cs" />
   </Target>
 </Project>

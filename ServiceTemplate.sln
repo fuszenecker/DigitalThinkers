@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC88DE3A-2B75-4FBF-A5E6-1D72BF6A8726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalThinkers", "src\Api\DigitalThinkers.csproj", "{A23F3BF2-142F-4D13-81DD-6E64471F1CE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTemplate", "src\Api\ServiceTemplate.csproj", "{A23F3BF2-142F-4D13-81DD-6E64471F1CE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{27870BCE-4BC7-42C0-B6F2-AED9CE351BB5}"
 EndProject

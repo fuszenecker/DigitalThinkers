@@ -3,8 +3,8 @@ using System.IO;
 using System.Reflection;
 using CorrelationId;
 using CorrelationId.DependencyInjection;
-using DigitalThinkers.Domain.Interfaces;
-using DigitalThinkers.Domain.Services;
+using ServiceTemplate.Domain.Interfaces;
+using ServiceTemplate.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +20,7 @@ using Microsoft.OpenApi.Models;
 using Prometheus;
 using Serilog;
 
-namespace DigitalThinkers
+namespace ServiceTemplate
 {
     public class Startup
     {
@@ -55,8 +55,8 @@ namespace DigitalThinkers
             services
                 .AddSwaggerGen(c => {
                     // FIXME: works, but not the best solution:
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DigitalThinkers", Version = "v1" });
-                    c.SwaggerDoc("v2", new OpenApiInfo { Title = "DigitalThinkers", Version = "v2" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ServiceTemplate", Version = "v1" });
+                    c.SwaggerDoc("v2", new OpenApiInfo { Title = "ServiceTemplate", Version = "v2" });
 
                     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

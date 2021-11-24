@@ -1,8 +1,8 @@
-# Digital Thinkers test excercise
+# .NET 6 Service Template
 
-[![.NET](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/dotnet.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/dotnet.yml)
-[![CodeQL](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/codeql-analysis.yml)
-[![Docker Image CI](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/docker-image.yml/badge.svg)](https://github.com/fuszenecker/DigitalThinkers/actions/workflows/docker-image.yml)
+[![.NET](https://github.com/fuszenecker/ServiceTemplate/actions/workflows/dotnet.yml/badge.svg)](https://github.com/fuszenecker/ServiceTemplate/actions/workflows/dotnet.yml)
+[![CodeQL](https://github.com/fuszenecker/ServiceTemplate/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/fuszenecker/ServiceTemplate/actions/workflows/codeql-analysis.yml)
+[![Docker Image CI](https://github.com/fuszenecker/ServiceTemplate/actions/workflows/docker-image.yml/badge.svg)](https://github.com/fuszenecker/ServiceTemplate/actions/workflows/docker-image.yml)
 
 ## How to run the solution
 
@@ -13,13 +13,13 @@ The service can be started
 1. "locally" by running (might take a little time to compile the code):
 
     ```text
-    dotnet run --project .\src\Api\DigitalThinkers.csproj
+    dotnet run --project .\src\Api\ServiceTemplate.csproj
     ```
 
     or on Linux:
 
     ```text
-    dotnet run --project ./src/Api/DigitalThinkers.csproj
+    dotnet run --project ./src/Api/ServiceTemplate.csproj
     ```
 
 2. Or you can start the service and run the tests with means of `docker-compose`:

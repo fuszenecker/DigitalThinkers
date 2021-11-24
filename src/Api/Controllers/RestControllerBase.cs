@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigitalThinkers.Contracts;
+using ServiceTemplate.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DigitalThinkers.Controllers
+namespace ServiceTemplate.Controllers
 {
     public class RestControllerBase : ControllerBase
     {

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using DigitalThinkers.DataAccess.Contexts;
-using DigitalThinkers.DataAccess.Entities;
-using DigitalThinkers.Domain.Entities;
-using DigitalThinkers.Domain.Interfaces;
+using ServiceTemplate.DataAccess.Contexts;
+using ServiceTemplate.DataAccess.Entities;
+using ServiceTemplate.Domain.Entities;
+using ServiceTemplate.Domain.Interfaces;
 
-namespace DigitalThinkers.DataAccess.Repositories
+namespace ServiceTemplate.DataAccess.Repositories
 {
     public class CoinsRepository : ICoinsRepository, IDisposable
     {

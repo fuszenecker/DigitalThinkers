@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using DigitalThinkers.Contracts;
-using DigitalThinkers.Domain.Interfaces;
+using ServiceTemplate.Contracts;
+using ServiceTemplate.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace DigitalThinkers.Controllers
+namespace ServiceTemplate.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]

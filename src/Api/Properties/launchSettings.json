@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DigitalThinkers": {
+    "ServiceTemplate": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000/swagger",

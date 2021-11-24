@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using DigitalThinkers.Domain.Entities;
+using ServiceTemplate.Domain.Entities;
 
-namespace DigitalThinkers.Domain.Services
+namespace ServiceTemplate.Domain.Services
 {
     public class MonetaryServiceBase
     {

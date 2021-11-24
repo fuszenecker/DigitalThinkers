@@ -1,7 +1,7 @@
 using System;
-using DigitalThinkers.Domain.Entities;
+using ServiceTemplate.Domain.Entities;
 
-namespace DigitalThinkers.Domain.Interfaces
+namespace ServiceTemplate.Domain.Interfaces
 {
     public interface ICoinsRepository
     {

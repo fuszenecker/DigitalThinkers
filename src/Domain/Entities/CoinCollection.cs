@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DigitalThinkers.Domain.Entities
+namespace ServiceTemplate.Domain.Entities
 {
     public class CoinCollection : Dictionary<uint, uint>
     {

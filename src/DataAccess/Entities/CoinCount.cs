@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DigitalThinkers.DataAccess.Entities
+namespace ServiceTemplate.DataAccess.Entities
 {
     public class CoinCount
     {

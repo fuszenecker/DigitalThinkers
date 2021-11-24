@@ -15,20 +15,20 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS dotnet-build
 WORKDIR /src
-COPY ["Api/DigitalThinkers.csproj", "Api/"]
+COPY ["Api/ServiceTemplate.csproj", "Api/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
 COPY ["UnitTests/UnitTests.csproj", "UnitTests/"]
-RUN dotnet restore "Api/DigitalThinkers.csproj"
+RUN dotnet restore "Api/ServiceTemplate.csproj"
 RUN dotnet restore "UnitTests/UnitTests.csproj"
 COPY . .
-RUN dotnet build "Api/DigitalThinkers.csproj" -c Release -o /app/build
+RUN dotnet build "Api/ServiceTemplate.csproj" -c Release -o /app/build
 RUN dotnet test "UnitTests/UnitTests.csproj" -c Release
-RUN dotnet publish "Api/DigitalThinkers.csproj" -c Release -o /app/publish
+RUN dotnet publish "Api/ServiceTemplate.csproj" -c Release -o /app/publish
 
 # ----- Final image -----
 
 FROM base AS final
 WORKDIR /app
 COPY --from=dotnet-build /app/publish .
-ENTRYPOINT ["dotnet", "DigitalThinkers.dll"]
+ENTRYPOINT ["dotnet", "ServiceTemplate.dll"]

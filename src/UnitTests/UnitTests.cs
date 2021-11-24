@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigitalThinkers.Domain.Entities;
-using DigitalThinkers.Domain.Interfaces;
-using DigitalThinkers.Domain.Services;
+using ServiceTemplate.Domain.Entities;
+using ServiceTemplate.Domain.Interfaces;
+using ServiceTemplate.Domain.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests

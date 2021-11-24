@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
+                "${workspaceFolder}/src/Api/ServiceTemplate.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -35,7 +35,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
+                "${workspaceFolder}/src/Api/ServiceTemplate.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -48,7 +48,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
+                "${workspaceFolder}/src/Api/ServiceTemplate.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -61,14 +61,14 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "digitalthinkers:dev",
+                "tag": "ServiceTemplate:dev",
                 "target": "base",
                 "dockerfile": "${workspaceFolder}/src/Dockerfile",
                 "context": "${workspaceFolder}/src",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/ServiceTemplate.csproj"
             }
         },
         {
@@ -78,13 +78,13 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "digitalthinkers:latest",
+                "tag": "ServiceTemplate:latest",
                 "dockerfile": "${workspaceFolder}/src/Dockerfile",
                 "context": "${workspaceFolder}/src",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/ServiceTemplate.csproj"
             }
         },
         {
@@ -95,7 +95,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj",
+                "appProject": "${workspaceFolder}/src/Api/ServiceTemplate.csproj",
                 "enableDebugging": true
             }
         },
@@ -107,7 +107,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Api/DigitalThinkers.csproj"
+                "appProject": "${workspaceFolder}/src/Api/ServiceTemplate.csproj"
             }
         }
     ]

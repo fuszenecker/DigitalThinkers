@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using DigitalThinkers.Domain.Entities;
-using DigitalThinkers.Domain.Interfaces;
+using ServiceTemplate.Domain.Entities;
+using ServiceTemplate.Domain.Interfaces;
 
-namespace DigitalThinkers.Domain.Services
+namespace ServiceTemplate.Domain.Services
 {
     public class InMemoryMonetaryService : MonetaryServiceBase, IMonetaryService
     {
