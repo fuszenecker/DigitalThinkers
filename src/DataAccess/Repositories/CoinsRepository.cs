@@ -29,9 +29,9 @@ namespace ServiceTemplate.DataAccess.Repositories
         {
             var result = new CoinCollection();
 
-            if (context?.Coins is not null)
+            if (context is not null)
             {
-                foreach (var coin in context?.Coins)
+                foreach (var coin in context.Coins)
                 {
                     result[coin.Denominator] = coin.Count;
                 }
@@ -42,10 +42,10 @@ namespace ServiceTemplate.DataAccess.Repositories
 
         public void StoreCoins(CoinCollection coins)
         {
-            if (context?.Coins is not null)
+            if (context is not null)
             {
                 // Delete all existing items, and add the new items,
-                foreach (var item in context?.Coins)
+                foreach (var item in context.Coins)
                 {
                     context.Coins.Remove(item);
                 }
