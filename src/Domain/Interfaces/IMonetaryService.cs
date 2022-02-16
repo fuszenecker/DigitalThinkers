@@ -8,6 +8,6 @@ namespace ServiceTemplate.Domain.Interfaces
 
         CoinCollection GetCoins();
 
-        (string errorMessage, CoinCollection change) Checkout(CoinCollection coins, uint price);
+        (string? errorMessage, CoinCollection? change) Checkout(CoinCollection coins, uint price);
     }
 }

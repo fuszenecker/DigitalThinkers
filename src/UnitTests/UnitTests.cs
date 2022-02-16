@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ServiceTemplate.Domain.Entities;
 using ServiceTemplate.Domain.Interfaces;
@@ -11,7 +10,7 @@ namespace Tests
     [TestClass]
     public class UnitTests
     {
-        private IMonetaryService monetaryService;
+        private IMonetaryService monetaryService = null!;
 
         [TestInitialize]
         public void Initialize() {
@@ -42,7 +41,7 @@ namespace Tests
         [TestMethod]
         public void CheckoutNoInsertedMonetaryService()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => monetaryService.Checkout(null, 100));
+            Assert.ThrowsException<ArgumentNullException>(() => monetaryService.Checkout(null!, 100));
         }
 
         [TestMethod]

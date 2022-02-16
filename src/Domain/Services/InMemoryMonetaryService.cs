@@ -28,7 +28,7 @@ namespace ServiceTemplate.Domain.Services
             }
         }
 
-        public (string errorMessage, CoinCollection change) Checkout(CoinCollection coins, uint price)
+        public (string? errorMessage, CoinCollection? change) Checkout(CoinCollection coins, uint price)
         {
             if (coins is null)
             {

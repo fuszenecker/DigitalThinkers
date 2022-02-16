@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using ServiceTemplate.DataAccess.Contexts;
 using ServiceTemplate.DataAccess.Entities;
 using ServiceTemplate.Domain.Entities;
@@ -9,7 +8,7 @@ namespace ServiceTemplate.DataAccess.Repositories
 {
     public class CoinsRepository : ICoinsRepository, IDisposable
     {
-        private CoinsContext context = new();
+        private CoinsContext? context = new();
 
         public CoinsRepository()
         {
@@ -30,9 +29,12 @@ namespace ServiceTemplate.DataAccess.Repositories
         {
             var result = new CoinCollection();
 
-            foreach (var coin in context.Coins)
+            if (context?.Coins is not null)
             {
-                result[coin.Denominator] = coin.Count;
+                foreach (var coin in context?.Coins)
+                {
+                    result[coin.Denominator] = coin.Count;
+                }
             }
 
             return result;
@@ -40,29 +42,32 @@ namespace ServiceTemplate.DataAccess.Repositories
 
         public void StoreCoins(CoinCollection coins)
         {
-            // Delete all existing items, and add the new items,
-            foreach (var item in context.Coins)
+            if (context?.Coins is not null)
             {
-                context.Coins.Remove(item);
+                // Delete all existing items, and add the new items,
+                foreach (var item in context?.Coins)
+                {
+                    context.Coins.Remove(item);
+                }
             }
 
             foreach (var coin in coins)
             {
-                context.Coins.Add(new CoinCount()
+                context?.Coins.Add(new CoinCount()
                 {
                     Denominator = coin.Key,
                     Count = coin.Value
                 });
             }
 
-            context.SaveChanges();
+            context?.SaveChanges();
         }
 
         public void Transaction(Action action)
         {
-            using var transaction = context.Database.BeginTransaction();
+            using var transaction = context?.Database.BeginTransaction();
             action();
-            transaction.Commit();
+            transaction?.Commit();
         }
     }
 }

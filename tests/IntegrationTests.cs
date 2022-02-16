@@ -16,8 +16,8 @@ namespace Tests
         private const string MetricsEndpointPath = "/metrics";
         private const string CorrelationIdHeaderName = "X-Correlation-ID";
 
-        private HttpClient httpClient;
-        private Client serviceClient;
+        private HttpClient httpClient = null!;
+        private Client serviceClient = null!;
 
         [TestInitialize]
         public void Initialize()

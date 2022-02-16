@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ServiceTemplate.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceTemplate.Controllers

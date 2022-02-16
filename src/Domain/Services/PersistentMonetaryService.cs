@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ServiceTemplate.Domain.Entities;
 using ServiceTemplate.Domain.Interfaces;
@@ -31,7 +30,7 @@ namespace ServiceTemplate.Domain.Services
             return this.repository.GetCoins();
         }
 
-        public (string errorMessage, CoinCollection change) Checkout(CoinCollection coins, uint price)
+        public (string? errorMessage, CoinCollection? change) Checkout(CoinCollection coins, uint price)
         {
             if (coins is null)
             {
@@ -43,7 +42,7 @@ namespace ServiceTemplate.Domain.Services
                 return ("Proce should not be zero.", null);
             }
 
-            try 
+            try
             {
                 var total = coins.Sum(n => n.Key * n.Value);
 
@@ -52,7 +51,7 @@ namespace ServiceTemplate.Domain.Services
                     return ($"More money should be inserted: {price - total} is missing, {total} is inserted.", null);
                 }
 
-                (string errorMessage, CoinCollection change) result = (null, null);
+                (string? errorMessage, CoinCollection? change) result = (null, null);
 
                 this.repository.Transaction(() => {
                     // The total amount of money we should give back.
@@ -76,9 +75,8 @@ namespace ServiceTemplate.Domain.Services
                     {
                         result = ($"Cannot accept money, {newChange} cannot be paid back.", null);
                     }
-
                 });
-                
+
                 return result;
             }
             catch (OverflowException ex)

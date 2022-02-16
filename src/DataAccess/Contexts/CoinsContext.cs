@@ -8,6 +8,6 @@ namespace ServiceTemplate.DataAccess.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($"Data Source=coins.db");
 
-        public DbSet<CoinCount> Coins { get; set; }
+        public DbSet<CoinCount> Coins { get; set; } = null!;
     }
 }
