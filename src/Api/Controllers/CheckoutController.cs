@@ -24,7 +24,7 @@ namespace ServiceTemplate.Controllers
         }
 
         /// <summary>
-        /// Checkiut: tell the price and insert coins to the machine.
+        /// Checkout: tell the price and insert coins to the machine.
         /// </summary>
         /// <param name="request">The DTO for coins to be inserted.</param>
         [HttpPost]

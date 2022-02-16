@@ -22,7 +22,7 @@ namespace ServiceTemplate.Domain.Services
 
         protected static (uint, CoinCollection) CalculatePayBack (uint change, CoinCollection newStore)
         {
-            // And calculate ehat to give back:
+            // And calculate that to give back:
             var giveBack = new CoinCollection();
 
             foreach (var coin in newStore.Keys.OrderByDescending(v => v))

@@ -37,7 +37,7 @@ namespace ServiceTemplate.Domain.Services
 
             if (price == 0)
             {
-                return ("Proce should not be zero.", null);
+                return ("Price should not be zero.", null);
             }
 
             try
@@ -55,7 +55,7 @@ namespace ServiceTemplate.Domain.Services
                     var change = (uint)total - price;
 
                     // This store will contain all the coins and notes we should give back.
-                    // Hypotetically merge the current store and the money coming from customer.
+                    // Hypothetically merge the current store and the money coming from customer.
                     var newStore = new CoinCollection(store);
 
                     MergeCoins(coins, newStore);
