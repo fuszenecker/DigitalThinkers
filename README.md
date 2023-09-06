@@ -37,7 +37,7 @@ The service can be started
             condition: service_started
     ```
 
-    So if you want to use `docker-compose`, please use Windows and the latest Docker Desktop.
+    So if you want to use `docker-compose`, please use Windows and the latest Docker Desktop or Rancher Desktop.
 
 3. If you press `F5` button in `Visual Studio Code` or `Visual Studio`, the Swagger page will be shown in the browser window soon.
 
